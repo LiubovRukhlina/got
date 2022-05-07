@@ -1,0 +1,6 @@
+<h2>Game of Thrones Books</h2>
+<div class="books-menu">
+  <a *ngFor="let book of books" routerLink="/{{ book.name }}">
+    {{ book.name }}
+  </a>
+</div>

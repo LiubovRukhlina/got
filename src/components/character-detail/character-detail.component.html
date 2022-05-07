@@ -1,0 +1,5 @@
+<div *ngIf="character">
+  <h2>{{ character?.name | uppercase }} Details</h2>
+  <div>Character gender: {{ character?.gender }}</div>
+  <button type="button" (click)="goBack()">go back</button>
+</div>

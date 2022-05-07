@@ -1,0 +1,16 @@
+<h2>Game of Thrones Houses</h2>
+<app-house-search></app-house-search>
+<ul class="houses">
+  <li *ngFor="let house of houses">
+    <button
+      [class.selected]="house === selectedHouse"
+      type="button"
+      (click)="onSelect(house)"
+    >
+      <span class="badge">{{ house.name }}</span>
+      <span class="name">{{ house.region }}</span>
+    </button>
+  </li>
+</ul>
+
+<app-house-detail [house]="selectedHouse"></app-house-detail>
