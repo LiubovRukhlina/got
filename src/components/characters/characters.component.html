@@ -2,9 +2,15 @@
 <app-character-search></app-character-search>
 <ul class="characters">
   <li *ngFor="let character of characters">
-    <a routerLink="/{{ character.name }}">
-      <span class="badge">{{ character.name }}</span
+    <a routerLink="/characters/{{ character.id }}">
+      <span class="badge">{{ character.id }}</span
       >{{ character.name }}
     </a>
   </li>
 </ul>
+
+<p-paginator
+  [rows]="50"
+  [totalRecords]="2000"
+  (onPageChange)="paginate($event)"
+></p-paginator>

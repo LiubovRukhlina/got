@@ -3,6 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { Character } from 'src/services/character/character';
 import { MessageService } from 'src/services/message/message.service';
 
+type PaginatorEvent = {
+  page: number;
+};
 @Component({
   selector: 'app-characters',
   templateUrl: './characters.component.html',
@@ -11,6 +14,7 @@ import { MessageService } from 'src/services/message/message.service';
 export class CharactersComponent implements OnInit {
   characters: Character[] = [];
   selectedCharacter?: Character;
+  private currentPage = 1;
 
   constructor(
     private characterService: CharacterService,
@@ -19,7 +23,7 @@ export class CharactersComponent implements OnInit {
 
   getCharacters(): void {
     this.characterService
-      .getCharacters()
+      .getCharacters(this.currentPage)
       .subscribe((characters) => (this.characters = characters));
   }
 
@@ -31,5 +35,9 @@ export class CharactersComponent implements OnInit {
     this.messageService.add(
       `CharactersComponent: Selected character gender=${character.gender}`
     );
+  }
+  paginate(event: PaginatorEvent): void {
+    this.currentPage = event.page + 1;
+    this.getCharacters();
   }
 }

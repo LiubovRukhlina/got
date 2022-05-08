@@ -14,6 +14,8 @@ import { HousesComponent } from '../components/houses/houses.component';
 import { HouseDetailComponent } from 'src/components/house-detail/house-detail.component';
 import { BookDetailComponent } from 'src/components/book-detail/book-detail.component';
 import { HouseSearchComponent } from 'src/components/house-search/house-search.component';
+import { PaginatorModule } from 'primeng/paginator';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,14 @@ import { HouseSearchComponent } from 'src/components/house-search/house-search.c
     BookDetailComponent,
     HouseSearchComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    PaginatorModule,
+    BrowserAnimationsModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

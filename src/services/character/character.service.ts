@@ -9,16 +9,29 @@ import { catchError, map, tap } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class CharacterService {
-  private charactersUrl =
-    'https://www.anapioficeandfire.com/api/characters?page=2&pageSize=100';
+  private charactersUrl = 'https://www.anapioficeandfire.com/api/characters';
+  private pageSize = 50;
+  private totalPages = 43;
   constructor(
     private http: HttpClient,
     private messageService: MessageService
   ) {}
 
-  getCharacters(): Observable<Character[]> {
-    return this.http.get<Character[]>(this.charactersUrl).pipe(
+  getCharacters(pageNumber: number): Observable<Character[]> {
+    const url = `${this.charactersUrl}?page=${pageNumber || 1}&pageSize=${
+      this.pageSize
+    }`;
+
+    return this.http.get<Character[]>(url).pipe(
       tap((_) => this.log('fetched characters')),
+      map((characters) => {
+        const chractersWithId = characters.map((character, index) => {
+          const id = character.url.split('/').pop() || `${index}`;
+          return { ...character, id };
+        });
+
+        return chractersWithId;
+      }),
       catchError(this.handleError<Character[]>('getCharacters', []))
     );
   }
@@ -26,6 +39,10 @@ export class CharacterService {
     const url = `${this.charactersUrl}/${id}`;
     return this.http.get<Character>(url).pipe(
       tap((_) => this.log(`fetched character id=${id}`)),
+      map((character, index) => {
+        const id = character.url.split('/').pop() || `${index}`;
+        return { ...character, id };
+      }),
       catchError(this.handleError<Character>(`getCharacter id=${id}`))
     );
   }
@@ -43,6 +60,14 @@ export class CharacterService {
             ? this.log(`found characters matching "${term}"`)
             : this.log(`no characters matching "${term}"`)
         ),
+        map((characters) => {
+          const chractersWithId = characters.map((character, index) => {
+            const id = character.url.split('/').pop() || `${index}`;
+            return { ...character, id };
+          });
+
+          return chractersWithId;
+        }),
         catchError(this.handleError<Character[]>('searchCharacters', []))
       );
   }

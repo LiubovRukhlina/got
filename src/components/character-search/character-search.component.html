@@ -4,7 +4,7 @@
 
   <ul class="search-result">
     <li *ngFor="let character of characters$ | async">
-      <a routerLink="/{{ character.name }}">
+      <a routerLink="/characters/{{ character.id }}">
         {{ character.name }}
       </a>
     </li>
