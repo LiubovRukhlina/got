@@ -1,5 +1,41 @@
 <div *ngIf="character">
   <h2>{{ character?.name | uppercase }} Details</h2>
+  <div>Character name: {{ character.name }}</div>
   <div>Character gender: {{ character?.gender }}</div>
+  <div>Character culture: {{ character?.culture }}</div>
+  <div>born: {{ character?.born }}</div>
+  <div>died: {{ character?.died }}</div>
+  <div>Character titles: {{ character?.titles }}</div>
+  <div>Character aliases: {{ character?.aliases }}</div>
+  <div>
+    Character father:
+    <a routerLink="/characters/{{ character.father.split('/').pop() }}">
+      <span class="badge"></span>{{ character.father }}
+    </a>
+  </div>
+  <div>
+    Character mother:
+    <a routerLink="/characters/{{ character.mother.split('/').pop() }}">
+      <span class="badge"></span>{{ character.mother }}
+    </a>
+  </div>
+  <div>
+    Character spouse:
+    <a routerLink="/characters/{{ character.spouse.split('/').pop() }}">
+      <span class="badge"></span>{{ character.spouse }}
+    </a>
+  </div>
+  <div>
+    Character allegiances:
+    <li *ngFor="let allegiance of character.allegiances">
+      <a routerLink="/houses/{{ allegiance.split('/').pop() }}">
+        {{ allegiance }}
+      </a>
+    </li>
+  </div>
+  <div>Character books: {{ character?.books }}</div>
+  <div>Character pov books: {{ character?.povBooks }}</div>
+  <div>Character tv series: {{ character?.tvSeries }}</div>
+  <div>Character played by: {{ character?.playedBy }}</div>
   <button type="button" (click)="goBack()">go back</button>
 </div>

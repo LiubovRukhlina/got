@@ -10,14 +10,27 @@ import { catchError, map, tap } from 'rxjs/operators';
 })
 export class HouseService {
   private housesUrl = 'https://www.anapioficeandfire.com/api/houses';
+  private pageSize = 50;
+  private totalPages = 43;
   constructor(
     private http: HttpClient,
     private messageService: MessageService
   ) {}
 
-  getHouses(): Observable<House[]> {
-    return this.http.get<House[]>(this.housesUrl).pipe(
+  getHouses(pageNumber: number): Observable<House[]> {
+    const url = `${this.housesUrl}?page=${pageNumber || 1}&pageSize=${
+      this.pageSize
+    }`;
+    return this.http.get<House[]>(url).pipe(
       tap((_) => this.log('fetched houses')),
+      map((houses) => {
+        const housesWithId = houses.map((house, index) => {
+          const id = house.url.split('/').pop() || `${index}`;
+          return { ...house, id };
+        });
+
+        return housesWithId;
+      }),
       catchError(this.handleError<House[]>('getHouses', []))
     );
   }
@@ -25,6 +38,10 @@ export class HouseService {
     const url = `${this.housesUrl}/${id}`;
     return this.http.get<House>(url).pipe(
       tap((_) => this.log(`fetched house id=${id}`)),
+      map((house, index) => {
+        const id = house.url.split('/').pop() || `${index}`;
+        return { ...house, id };
+      }),
       catchError(this.handleError<House>(`getHouse id=${id}`))
     );
   }
@@ -40,6 +57,14 @@ export class HouseService {
           ? this.log(`found houses matching "${term}"`)
           : this.log(`no houses matching "${term}"`)
       ),
+      map((houses) => {
+        const housesWithId = houses.map((house, index) => {
+          const id = house.url.split('/').pop() || `${index}`;
+          return { ...house, id };
+        });
+
+        return housesWithId;
+      }),
       catchError(this.handleError<House[]>('searchHouses', []))
     );
   }

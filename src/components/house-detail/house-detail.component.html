@@ -1,4 +1,54 @@
 <div *ngIf="house">
   <h2>{{ house.name | uppercase }} Details</h2>
+  <div>House name: {{ house.name }}</div>
   <div>House region: {{ house.region }}</div>
+  <div>House coat of arms: {{ house.coatOfArms }}</div>
+  <div>House words: {{ house.words }}</div>
+  <div>House titles: {{ house.titles }}</div>
+  <div>House seats: {{ house.seats }}</div>
+  <div>
+    House current Lord:
+    <a routerLink="/characters/{{ house.currentLord.split('/').pop() }}">
+      <span class="badge"></span>{{ house.currentLord }}
+    </a>
+  </div>
+  <div>
+    House heir:
+    <a routerLink="/characters/{{ house.heir.split('/').pop() }}">
+      <span class="badge"></span>{{ house.heir }}
+    </a>
+  </div>
+  <div>
+    House overlord:
+    <a routerLink="/houses/{{ house.overlord.split('/').pop() }}">
+      <span class="badge"></span>{{ house.overlord }}
+    </a>
+  </div>
+  <div>House founded: {{ house.founded }}</div>
+  <div>
+    House founder:
+    <a routerLink="/characters/{{ house.founder.split('/').pop() }}">
+      <span class="badge"></span>{{ house.founder }}
+    </a>
+  </div>
+  <div>House died out: {{ house.diedOut }}</div>
+  <div>House ancestral Weapons: {{ house.ancestralWeapons }}</div>
+  <div>
+    House cadet Branches:
+    <li *ngFor="let cadet of house.cadetBranches">
+      <a routerLink="/houses/{{ cadet.split('/').pop() }}">
+        {{ cadet }}
+      </a>
+    </li>
+  </div>
+  <div>
+    House sworn Members:
+    <li *ngFor="let swornmember of house.swornMembers">
+      <a routerLink="/characters/{{ swornmember.split('/').pop() }}">
+        {{ swornmember }}
+      </a>
+    </li>
+  </div>
+
+  <button type="button" (click)="goBack()">go back</button>
 </div>

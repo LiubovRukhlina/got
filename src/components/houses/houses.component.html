@@ -2,15 +2,15 @@
 <app-house-search></app-house-search>
 <ul class="houses">
   <li *ngFor="let house of houses">
-    <button
-      [class.selected]="house === selectedHouse"
-      type="button"
-      (click)="onSelect(house)"
-    >
-      <span class="badge">{{ house.name }}</span>
-      <span class="name">{{ house.region }}</span>
-    </button>
+    <a routerLink="/houses/{{ house.id }}">
+      <span class="badge">{{ house.id }}</span
+      >{{ house.name }}
+    </a>
   </li>
 </ul>
 
-<app-house-detail [house]="selectedHouse"></app-house-detail>
+<p-paginator
+  [rows]="50"
+  [totalRecords]="444"
+  (onPageChange)="paginate($event)"
+></p-paginator>

@@ -32,9 +32,9 @@ export class CharactersComponent implements OnInit {
   }
   onSelect(character: Character): void {
     this.selectedCharacter = character;
-    this.messageService.add(
-      `CharactersComponent: Selected character gender=${character.gender}`
-    );
+    // this.messageService.add(
+    //   `CharactersComponent: Selected character gender=${character.gender}`
+    // );
   }
   paginate(event: PaginatorEvent): void {
     this.currentPage = event.page + 1;
