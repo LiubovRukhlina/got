@@ -11,11 +11,11 @@ export class BooksComponent implements OnInit {
   books: Book[] = [];
 
   constructor(private bookService: BookService) {}
-
+//get books on initialization
   ngOnInit(): void {
     this.getBooks();
   }
-
+//get and update book list from book service subscribtion
   getBooks(): void {
     this.bookService.getBooks().subscribe((books) => (this.books = books));
   }

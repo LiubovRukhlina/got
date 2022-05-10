@@ -37,14 +37,12 @@ export class HouseDetailComponent implements OnInit {
     })
   }
 
-  // ngOnChanges(changes: SimpleChanges): void {
-  //   this.getHouse();
-  // }
-
+//get houses on component initiation
    ngOnInit(): void {
     this.getHouse();
   }
 
+  //getting a house from house service
   getHouse() {
     // const houseId = Number(this.route.snapshot.paramMap.get('id'));
 
@@ -57,10 +55,12 @@ export class HouseDetailComponent implements OnInit {
         this.getCadets()
       });
   }
+  //return to the previous page
   goBack(): void {
     this.location.back();
   }
 
+//geting the name of the lord of the house
   getCurrentLordName(): void {
     const lordId = Number(this.house?.currentLord.split('/').pop());
 
@@ -70,7 +70,7 @@ export class HouseDetailComponent implements OnInit {
         this.currentLordName = character.name
       });
   }
-
+//get characters of the house
   getMembers() {
     this.house?.swornMembers.map((swornMemberUrl) => {
       const memberId = Number(swornMemberUrl.split('/').pop());
@@ -84,6 +84,7 @@ export class HouseDetailComponent implements OnInit {
     })
   }
 
+  //getting cadert houses
   getCadets() {
     this.house?.cadetBranches.map((cadetUrl) => {
       const cadetId = Number(cadetUrl.split('/').pop());

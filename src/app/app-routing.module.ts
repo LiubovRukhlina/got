@@ -7,6 +7,7 @@ import { CharacterDetailComponent } from 'src/components/character-detail/charac
 import { BookDetailComponent } from 'src/components/book-detail/book-detail.component';
 import { HouseDetailComponent } from 'src/components/house-detail/house-detail.component';
 
+//route navigation for app views
 const routes: Routes = [
   { path: 'characters', component: CharactersComponent },
   { path: 'books', component: BooksComponent },

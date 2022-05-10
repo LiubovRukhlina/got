@@ -17,6 +17,7 @@ export class CharacterService {
     private messageService: MessageService
   ) {}
 
+  //Getting all the characters on the current page
   getCharacters(pageNumber: number): Observable<Character[]> {
     const url = `${this.charactersUrl}?page=${pageNumber || 1}&pageSize=${
       this.pageSize
@@ -35,6 +36,7 @@ export class CharacterService {
       catchError(this.handleError<Character[]>('getCharacters', []))
     );
   }
+  //Getting a specific character with given id
   getCharacter(id: number): Observable<Character> {
     const url = `${this.charactersUrl}/${id}`;
     return this.http.get<Character>(url).pipe(
@@ -46,7 +48,7 @@ export class CharacterService {
       catchError(this.handleError<Character>(`getCharacter id=${id}`))
     );
   }
-
+//search character by name
   searchCharacters(term: string): Observable<Character[]> {
     if (!term.trim()) {
       // if not search term, return empty hero array.
@@ -71,12 +73,12 @@ export class CharacterService {
         catchError(this.handleError<Character[]>('searchCharacters', []))
       );
   }
+  //handling an error
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-      // TODO: send the error to remote logging infrastructure
+
       console.error(error); // log to console instead
 
-      // TODO: better job of transforming error for user consumption
       this.log(`${operation} failed: ${error.message}`);
 
       // Let the app keep running by returning an empty result.

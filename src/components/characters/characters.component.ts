@@ -20,22 +20,24 @@ export class CharactersComponent implements OnInit {
     private characterService: CharacterService,
     private messageService: MessageService
   ) {}
-
+//get all the characters from character service
   getCharacters(): void {
     this.characterService
       .getCharacters(this.currentPage)
       .subscribe((characters) => (this.characters = characters));
   }
-
+//get characters on component initialization
   ngOnInit(): void {
     this.getCharacters();
   }
+
+  //selecting the current character
   onSelect(character: Character): void {
     this.selectedCharacter = character;
-    // this.messageService.add(
-    //   `CharactersComponent: Selected character gender=${character.gender}`
-    // );
+
   }
+
+  //change characters display depending on the page
   paginate(event: PaginatorEvent): void {
     this.currentPage = event.page + 1;
     this.getCharacters();

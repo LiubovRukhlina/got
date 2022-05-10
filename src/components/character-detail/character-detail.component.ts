@@ -32,10 +32,12 @@ export class CharacterDetailComponent implements OnInit {
     })
   }
 
+  //get character on initialization
   ngOnInit(): void {
     this.getCharacter();
   }
 
+  //get character from character service subscribtion
   getCharacter(): void {
 
     this.characterId && this.characterService
@@ -50,10 +52,12 @@ export class CharacterDetailComponent implements OnInit {
       });
 
   }
+  //return to previous page
   goBack(): void {
     this.location.back();
   }
 
+  //get father of character from character service
   getFather(): void {
     const fatherId = Number(this.character?.father.split('/').pop());
     this.characterService
@@ -63,6 +67,7 @@ export class CharacterDetailComponent implements OnInit {
       });
   }
 
+  //get mother of character from character service
   getMother(): void {
     const motherId = Number(this.character?.mother.split('/').pop());
     this.characterService
@@ -71,6 +76,7 @@ export class CharacterDetailComponent implements OnInit {
         this.mother = character.name
       });
   }
+  //get spouse of character from character service
   getSpouse(): void {
     const spouseId = Number(this.character?.spouse.split('/').pop());
     this.characterService
@@ -79,7 +85,7 @@ export class CharacterDetailComponent implements OnInit {
         this.spouse = character.name
       });
   }
-
+  //get alligiences of character from house service
   getAllegiances() {
     this.character?.allegiances.map((allegianceUrl) => {
       const allegianceId = Number(allegianceUrl.split('/').pop());
@@ -91,7 +97,7 @@ export class CharacterDetailComponent implements OnInit {
         });
     })
   }
-
+  //get books where characters are present
   getBooks() {
     this.character?.books.map((bookUrl) => {
       const bookId = Number(bookUrl.split('/').pop());
@@ -103,6 +109,7 @@ export class CharacterDetailComponent implements OnInit {
         });
     })
   }
+  //get books where characters have point of view
   getPovBooks() {
     this.character?.povBooks.map((bookUrl) => {
       const bookId = Number(bookUrl.split('/').pop());
