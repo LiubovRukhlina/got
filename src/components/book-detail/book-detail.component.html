@@ -1,5 +1,22 @@
 <div *ngIf="book">
   <h2>{{ book.name | uppercase }} Details</h2>
+  <div>Book name: {{ book?.name }}</div>
   <div>Book ISBN: {{ book?.isbn }}</div>
+  <div>Book authors: {{ book?.authors }}</div>
+  <div>Book number of pages: {{ book?.numberOfPages }}</div>
+  <div>Book publisher: {{ book?.publisher }}</div>
+  <div>Book country: {{ book?.country }}</div>
+  <div>Book media type: {{ book?.mediaType }}</div>
+  <div>released: {{ book?.released }}</div>
+  <div>Book characters:  <li *ngFor="let character of characterList | keyvalue">
+    <a routerLink="/characters/{{ character.key}}">
+      {{ character.value }}
+    </a>
+  </li></div>
+  <div>Book pov characters:  <li *ngFor="let character of povCharacterList | keyvalue">
+    <a routerLink="/characters/{{ character.key}}">
+      {{ character.value }}
+    </a>
+  </li></div>
 </div>
 <button type="button" (click)="goBack()">go back</button>

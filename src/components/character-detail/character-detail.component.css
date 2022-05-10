@@ -21,3 +21,17 @@ button:disabled {
   color: #ccc;
   cursor: auto;
 }
+mat-card {
+  background-color: rgba(48, 136, 174, 0.2);
+  margin: 3rem;
+  max-width: fit-content;
+
+  display: block;
+}
+.wrap-iblock > * {
+  display: inline-block;
+
+}
+h3{
+  font-weight: bold;
+}

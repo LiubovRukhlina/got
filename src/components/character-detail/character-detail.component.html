@@ -1,41 +1,77 @@
 <div *ngIf="character">
   <h2>{{ character?.name | uppercase }} Details</h2>
-  <div>Character name: {{ character.name }}</div>
-  <div>Character gender: {{ character?.gender }}</div>
-  <div>Character culture: {{ character?.culture }}</div>
-  <div>born: {{ character?.born }}</div>
-  <div>died: {{ character?.died }}</div>
-  <div>Character titles: {{ character?.titles }}</div>
-  <div>Character aliases: {{ character?.aliases }}</div>
-  <div>
-    Character father:
-    <a routerLink="/characters/{{ character.father.split('/').pop() }}">
-      <span class="badge"></span>{{ character.father }}
-    </a>
-  </div>
-  <div>
-    Character mother:
-    <a routerLink="/characters/{{ character.mother.split('/').pop() }}">
-      <span class="badge"></span>{{ character.mother }}
-    </a>
-  </div>
-  <div>
-    Character spouse:
-    <a routerLink="/characters/{{ character.spouse.split('/').pop() }}">
-      <span class="badge"></span>{{ character.spouse }}
-    </a>
-  </div>
-  <div>
-    Character allegiances:
-    <li *ngFor="let allegiance of character.allegiances">
-      <a routerLink="/houses/{{ allegiance.split('/').pop() }}">
-        {{ allegiance }}
-      </a>
-    </li>
-  </div>
-  <div>Character books: {{ character?.books }}</div>
-  <div>Character pov books: {{ character?.povBooks }}</div>
-  <div>Character tv series: {{ character?.tvSeries }}</div>
-  <div>Character played by: {{ character?.playedBy }}</div>
+  <mat-card>
+    <mat-list>
+      <h3 >Personal info:</h3>
+      <mat-list-item>
+        <mat-icon matListIcon>face</mat-icon>
+        <h4 matLine>{{ character.name }}</h4>
+        <p matLine class="demo-2"> {{ character?.gender }}, {{ character?.culture }}</p>
+        <p matLine class="demo-2"> born: {{ character?.born || "-" }}</p>
+        <p matLine class="demo-2"> died: {{ character?.died || "-" }}</p>
+      </mat-list-item>
+      <h3 matSubheader><strong>Titles</strong></h3>
+      <li *ngFor="let title of character.titles">{{ title }}
+      </li>
+      <h3 matSubheader>Aliases</h3>
+      <li *ngFor="let ally of character.aliases">
+       {{ ally }}
+      </li>
+      <div class="wrap-iblock">
+
+        <h2><strong>Family:</strong></h2>
+      </div>
+
+      <mat-list-item>
+        <mat-icon matListIcon>favorite</mat-icon>
+        <h4 matLine class="demo-2">Father:
+        <a routerLink="/characters/{{ character.father.split('/').pop() }}">
+           {{ father  }}
+        </a></h4>
+
+
+        <h4 matLine class="demo-2">Mother:
+        <a routerLink="/characters/{{ character.mother.split('/').pop() }}">
+          {{ mother }}
+        </a></h4>
+
+        <h4 matLine class="demo-2">Spouse:
+        <a routerLink="/characters/{{ character.spouse.split('/').pop() }}">
+           {{ spouse }}
+        </a></h4>
+      </mat-list-item>
+    </mat-list>
+    <div>
+      Character allegiances:
+      <li *ngFor="let allegiance of allegianceList | keyvalue">
+        <a routerLink="/houses/{{ allegiance.key}}">
+          {{ allegiance.value }}
+        </a>
+      </li>
+    </div>
+    <div>
+      Character books:
+      <li *ngFor="let book of bookList | keyvalue">
+        <a routerLink="/books/{{ book.key }}">
+          {{ book.value }}
+        </a>
+      </li>
+    </div>
+    <div>
+      Character pov books:
+      <li *ngFor="let book of povBookList  | keyvalue">
+        <a routerLink="/books/{{ book.key}}">
+          {{ book.value }}
+        </a>
+      </li>
+    </div>
+    <div>
+      Character tv series:
+      <li *ngFor="let serie of character.tvSeries">
+        {{ serie }}
+      </li>
+    </div>
+    <div>Character played by: {{ character?.playedBy }}</div>
+  </mat-card>
   <button type="button" (click)="goBack()">go back</button>
 </div>

@@ -1,1 +1,12 @@
-<p>house-search works!</p>
+<div id="search-component">
+  <label for="search-box">House Search</label>
+  <input #searchBox id="search-box" (input)="search(searchBox.value)" />
+
+  <ul class="search-result">
+    <li *ngFor="let house of houses$ | async">
+      <a routerLink="/houses/{{ house.id }}">
+        {{ house.name }}
+      </a>
+    </li>
+  </ul>
+</div>

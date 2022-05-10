@@ -16,6 +16,9 @@ import { BookDetailComponent } from 'src/components/book-detail/book-detail.comp
 import { HouseSearchComponent } from 'src/components/house-search/house-search.component';
 import { PaginatorModule } from 'primeng/paginator';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatCardModule} from "@angular/material/card";
+import {MatListModule} from "@angular/material/list";
+import {MatIconModule} from "@angular/material/icon";
 
 @NgModule({
   declarations: [
@@ -37,6 +40,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     PaginatorModule,
     BrowserAnimationsModule,
+    MatCardModule,
+    MatListModule,
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

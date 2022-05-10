@@ -9,7 +9,7 @@
   <div>
     House current Lord:
     <a routerLink="/characters/{{ house.currentLord.split('/').pop() }}">
-      <span class="badge"></span>{{ house.currentLord }}
+      <span class="badge"></span>{{ currentLordName }}
     </a>
   </div>
   <div>
@@ -35,17 +35,17 @@
   <div>House ancestral Weapons: {{ house.ancestralWeapons }}</div>
   <div>
     House cadet Branches:
-    <li *ngFor="let cadet of house.cadetBranches">
-      <a routerLink="/houses/{{ cadet.split('/').pop() }}">
-        {{ cadet }}
+    <li *ngFor="let cadet of cadetList | keyvalue">
+      <a routerLink="/houses/{{ cadet.key }}">
+        {{ cadet.value }}
       </a>
     </li>
   </div>
   <div>
     House sworn Members:
-    <li *ngFor="let swornmember of house.swornMembers">
-      <a routerLink="/characters/{{ swornmember.split('/').pop() }}">
-        {{ swornmember }}
+    <li *ngFor="let swornmember of membersList | keyvalue">
+      <a routerLink="/characters/{{ swornmember.key }}">
+        {{ swornmember.value }}
       </a>
     </li>
   </div>
